@@ -1,0 +1,25 @@
+####################
+# main-template.yaml
+####################
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Stack principal que usa o modulo EC2
+
+Parameters:
+  EC2InstanceType:
+    Type: String
+    Default: "t2.micro"
+    Description: Tipo de instancia EC2
+  EC2InstanceName:
+    Type: String
+    Default: "MinhaInstanciaEC2"
+    Description: Nome da instancia EC2
+
+Resources:
+  EC2Module:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://raw.githubusercontent.com/MameliTech/cf-modules-ec2/master/ec2-template.yaml
+      Parameters:
+        EC2InstanceType: !Sub '${EC2InstanceType}'
+        EC2InstanceName: !Sub '${EC2InstanceName}'
